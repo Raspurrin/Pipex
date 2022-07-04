@@ -6,7 +6,7 @@
 #    By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/08 18:53:57 by mialbert          #+#    #+#              #
-#    Updated: 2022/07/01 04:15:33 by mialbert         ###   ########.fr        #
+#    Updated: 2022/07/01 20:37:55 by mialbert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,11 @@ CFLAGS	= -Wall -Werror -Wextra
 HEADER	= -I includes -I libs/libft/srcs
 LIBFT	= ./libs/libft/srcs/
 DEBUG	= -fsanitize=address
-SRCS	= ./srcs/test.c
+SRCS	=	./srcs/test.c \
+			./srcs/init.c \
+			./srcs/errors.c \
+			./srcs/execution.c
+
 OBJS	= $(SRCS:.c=.o)
 
 NC		:= \033[0m

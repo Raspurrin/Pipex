@@ -1,0 +1,16 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/mialbert/Documents/Pipex'
+echo "\n\033[0;34m======== libft ========\033[0m"
+/Applications/Xcode.app/Contents/Developer/usr/bin/make -C ./libs/libft/srcs/
+make: Entering an unknown directory
+make: Leaving an unknown directory
+GCC -Wall -Werror -Wextra   -c -o srcs/init.o srcs/init.c
+GCC -Wall -Werror -Wextra   -c -o srcs/errors.o srcs/errors.c
+GCC -Wall -Werror -Wextra   -c -o srcs/execution.o srcs/execution.c
+echo "\033[0;35m======== Compiling... ========\033[0m"
+GCC -Wall -Werror -Wextra -I includes -I libs/libft/srcs ./libs/libft/srcs/libft.a ./srcs/test.o ./srcs/init.o ./srcs/errors.o ./srcs/execution.o -fsanitize=address -o pipex
+make: Leaving directory `/Users/mialbert/Documents/Pipex'
+ 
+make: *** ./libs/libft/srcs/: No such file or directory.  Stop.
+make: *** [libft] Error 2
+
