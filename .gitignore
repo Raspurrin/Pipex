@@ -55,3 +55,6 @@ dkms.conf
 
 *.log
 .vscode/*
+.vscode/
+.vscode/*.log
+.vscode/dryrun.log
