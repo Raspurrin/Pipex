@@ -29,4 +29,8 @@ typedef struct s_data
 	char	**path;
 }	t_data;
 
+void	init_data(int argc, char **argv, t_data *data, char **envp);
+void	display_error(char *error_msg);
+void	input_handler(int32_t argc);
+
 #endif

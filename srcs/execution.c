@@ -6,13 +6,13 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 18:48:19 by mialbert          #+#    #+#             */
-/*   Updated: 2022/07/02 08:19:01 by mialbert         ###   ########.fr       */
+/*   Updated: 2022/07/05 00:47:09 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-char	*find_path(t_data *data, size_t	argv_i)
+static char	*find_path(t_data *data, size_t	argv_i)
 {
 	char	**full_cmd;
 	char	*cmd;
@@ -33,27 +33,25 @@ char	*find_path(t_data *data, size_t	argv_i)
 
 // why malloc doesn't need typecast first 
 
-void	exec_cmds(t_data *data)
+static void	exec_cmds(t_data *data)
 {
 	size_t	i;
-	// int8_t	fd;
-	// int8_t	pipe_fd[2];
+	int8_t	pid;
+	int8_t	pipe_fd[2];
 	char	*path;
 
 	i = 1;
-	/* for (int32_t i = 0;data->path[i];i++)
-		printf("%s\n", data->path[i]); */
+	
 	while (i < (size_t)data->argc - 2)
 	{
 		path = find_path(data, i);
-		printf("%s\n", path);
-		// fd = fork();
-		// if (fd == 0)
-		// {
-		// 	;
-		// }
-		i++;
+		pid = fork();
+		if (pid == 0)
+		{
+			
+		}
 	}
+	
 }
 
 int32_t	main(int32_t argc, char **argv, char **envp)

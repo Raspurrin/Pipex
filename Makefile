@@ -6,18 +6,17 @@
 #    By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/08 18:53:57 by mialbert          #+#    #+#              #
-#    Updated: 2022/07/01 20:37:55 by mialbert         ###   ########.fr        #
+#    Updated: 2022/07/04 23:26:34 by mialbert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC		= GCC
+CC		= clang
 NAME	= pipex
 CFLAGS	= -Wall -Werror -Wextra
 HEADER	= -I includes -I libs/libft/srcs
 LIBFT	= ./libs/libft/srcs/
 DEBUG	= -fsanitize=address
-SRCS	=	./srcs/test.c \
-			./srcs/init.c \
+SRCS	=	./srcs/init.c \
 			./srcs/errors.c \
 			./srcs/execution.c
 
@@ -37,8 +36,10 @@ libft:
 
 $(NAME): $(OBJS)
 	@echo "${PURPLE}======== Compiling... ========${NC}"
-	$(CC) $(CFLAGS) $(HEADER) $(LIBFT)libft.a $(OBJS) $(DEBUG) -o $(NAME)
+	$(CC) $(CFLAGS) $(HEADER) $(OBJS) $(LIBFT)libft.a $(DEBUG) -o $(NAME)
+# $(CC) $(CFLAGS) $(HEADER) $(OBJS) libs/libft/srcs/libft.a -o $(NAME)
 
+# clang -Wall -Werror -Wextra -I includes -I libs/libft/srcs  ./srcs/init.o ./srcs/errors.o ./srcs/execution.o libs/libft/srcs/libft.a -o pipex
 clean:
 	@rm -f $(OBJS)
 	@echo "${RED} Removed ${NC} $(OBJS)"
