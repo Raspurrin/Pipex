@@ -30,7 +30,8 @@ typedef struct s_data
 }	t_data;
 
 // void	init_data(int argc, char **argv, t_data *data, char **envp);
-t_data	*data(int argc, char **argv, char **envp);
+t_data	*data(void);
+void	init_data(int32_t argc, char **argv, char **envp);
 void	display_error(char *error_msg);
 void	input_handler(int32_t argc);
 
