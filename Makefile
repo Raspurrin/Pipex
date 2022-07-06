@@ -6,7 +6,7 @@
 #    By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/08 18:53:57 by mialbert          #+#    #+#              #
-#    Updated: 2022/07/06 00:18:04 by mialbert         ###   ########.fr        #
+#    Updated: 2022/07/06 07:49:04 by mialbert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,8 @@ GREEN 	:= \033[0;32m
 BLUE 	:= \033[0;34m
 PURPLE	:= \033[0;35m
 
+MSG		:= Compiling...
+
 all: libft $(NAME)
 
 libft:
@@ -35,9 +37,16 @@ libft:
 	@$(MAKE) -C $(LIBFT)
 
 $(NAME): $(OBJS)
-	@echo "${PURPLE}======== Compiling... ========${NC}"
-	$(CC) -g $(CFLAGS) $(HEADER) $(LIBFT)libft.a $(OBJS) $(DEBUG) -o $(NAME)
+	$(eval MSG = Bonus...)
+	@echo "${PURPLE}======== $(MSG) ========${NC}"
+	$(CC) $(BONUS) -g $(CFLAGS) $(HEADER) $(LIBFT)libft.a $(OBJS) $(DEBUG) -o $(NAME)
 # $(CC) $(CFLAGS) $(HEADER) $(OBJS) libs/libft/srcs/libft.a -o $(NAME)
+
+bonus: 
+	@echo "${PURPLE}======== Bonus... ========${NC}"
+	$(CC)  -g $(CFLAGS) -D BONUS=1 $(HEADER) $(LIBFT)libft.a $(SRCS) $(DEBUG) -o $(NAME)
+
+# $(eval BONUS = -D BONUS=1)
 
 # clang -Wall -Werror -Wextra -I includes -I libs/libft/srcs  ./srcs/init.o ./srcs/errors.o ./srcs/execution.o libs/libft/srcs/libft.a -o pipex
 clean:
