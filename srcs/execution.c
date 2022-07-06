@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 18:48:19 by mialbert          #+#    #+#             */
-/*   Updated: 2022/07/06 05:11:42 by mialbert         ###   ########.fr       */
+/*   Updated: 2022/07/06 05:22:27 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,7 @@ static void	exec_cmds(char **envp)
 	i = 0;
 	pipe(fd);
 	infile = open(data()->argv[0], O_RDONLY);
-	printf("infile: %s\n", data()->argv[0]);
 	outfile = open(data()->argv[data()->argc - 2], O_RDWR | O_CREAT, 0666);
-	printf ("outfile: %s\n", data()->argv[3]);
 	// printf("outfile: %s\n", data()->argv[0]);
 	dup2(infile, STDIN_FILENO);
 	while (i < (size_t)data()->argc - 2) 
@@ -67,21 +65,15 @@ static void	exec_cmds(char **envp)
 		{
 			if (i == (size_t)data()->argc - 3)
 			{
+				printf("test");
 				dup2(fd[1], outfile);
-				break;
 			}
 			else
 			{
 				path = find_path(i + 1);
-				printf("path: %s\n ", path);
 				dup2(fd[1], STDOUT_FILENO);
 			}
-			
-			printf("\n");
-			printf("\n");
 			ft_putnbr_fd(i, STDERR_FILENO);
-			for (size_t j = 0; data()->full_cmd[j]; j++)
-				printf("%s ", data()->full_cmd[j]);
 			close(fd[0]);
 			close(fd[1]);
 			if (execve(path, data()->full_cmd, envp) == -1)
