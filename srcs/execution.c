@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 18:48:19 by mialbert          #+#    #+#             */
-/*   Updated: 2022/07/06 05:22:27 by mialbert         ###   ########.fr       */
+/*   Updated: 2022/07/06 06:10:54 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,22 +58,26 @@ static void	exec_cmds(char **envp)
 	outfile = open(data()->argv[data()->argc - 2], O_RDWR | O_CREAT, 0666);
 	// printf("outfile: %s\n", data()->argv[0]);
 	dup2(infile, STDIN_FILENO);
-	while (i < (size_t)data()->argc - 2) 
+	while (i < (size_t)data()->argc - 3) 
 	{
 		pid = fork();
 		if (pid == 0)
 		{
-			if (i == (size_t)data()->argc - 3)
+			path = find_path(i + 1);
+			if (i == (size_t)data()->argc - 4)
 			{
-				printf("test");
-				dup2(fd[1], outfile);
+				ft_putnbr_fd(i, STDERR_FILENO);
+				printf(" deez paths: %s \n", path);
+				dup2(outfile, STDOUT_FILENO);
 			}
 			else
 			{
-				path = find_path(i + 1);
+				ft_putnbr_fd(i, STDERR_FILENO);
+				printf(" paths: %s \n", path);
 				dup2(fd[1], STDOUT_FILENO);
 			}
-			ft_putnbr_fd(i, STDERR_FILENO);
+			// for (size_t i = 0; data()->full_cmd[i]; i++)
+			// 	printf("%s ", data()->full_cmd[i]);
 			close(fd[0]);
 			close(fd[1]);
 			if (execve(path, data()->full_cmd, envp) == -1)
