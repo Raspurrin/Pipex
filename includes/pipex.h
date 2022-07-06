@@ -24,9 +24,10 @@
 
 typedef struct s_data
 {
-	int16_t	argc;
+	int32_t	argc;
 	char	**argv;
 	char	**path;
+	char	**full_cmd;
 }	t_data;
 
 // void	init_data(int argc, char **argv, t_data *data, char **envp);

@@ -6,7 +6,7 @@
 #    By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/08 18:53:57 by mialbert          #+#    #+#              #
-#    Updated: 2022/07/05 16:28:02 by mialbert         ###   ########.fr        #
+#    Updated: 2022/07/06 00:18:04 by mialbert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME	= pipex
 CFLAGS	= -Wall -Werror -Wextra
 HEADER	= -I includes -I libs/libft/srcs
 LIBFT	= ./libs/libft/srcs/
-DEBUG	= -fsanitize=address
+DEBUG	= 
 SRCS	=	./srcs/init.c \
 			./srcs/errors.c \
 			./srcs/execution.c
@@ -36,7 +36,7 @@ libft:
 
 $(NAME): $(OBJS)
 	@echo "${PURPLE}======== Compiling... ========${NC}"
-	$(CC) $(CFLAGS) $(HEADER) $(LIBFT)libft.a $(OBJS) $(DEBUG) -o $(NAME)
+	$(CC) -g $(CFLAGS) $(HEADER) $(LIBFT)libft.a $(OBJS) $(DEBUG) -o $(NAME)
 # $(CC) $(CFLAGS) $(HEADER) $(OBJS) libs/libft/srcs/libft.a -o $(NAME)
 
 # clang -Wall -Werror -Wextra -I includes -I libs/libft/srcs  ./srcs/init.o ./srcs/errors.o ./srcs/execution.o libs/libft/srcs/libft.a -o pipex
