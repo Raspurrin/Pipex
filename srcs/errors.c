@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 17:48:54 by mialbert          #+#    #+#             */
-/*   Updated: 2022/07/07 04:57:45 by mialbert         ###   ########.fr       */
+/*   Updated: 2022/07/07 23:17:50 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,28 @@
 
 void	free_at_exit(void)
 {
-	free(data()->argv);
-	free(data()->full_cmd);
-	free(data()->path);
+	if (data()->argv)
+		free(data()->argv);
+	if (data()->full_cmd)
+		free(data()->full_cmd);
+	if (data()->path)
+		free(data()->path);
 }
 
 /**
  * Perror uses the errno variable, which is set with an error message
  * by the last malfunctioning function
  * @param error_msg Including an error message of my own.
- * @param error_code Return of function/variable/fd that it's checking.
- * @param exit If true, this program will exit.
+ * @param yeet If true, this program will exit.
  */
-void	check_error(void *error_code, char *error_msg, bool yeet)
+void	display_error(char *error_msg, bool yeet)
 {
-	if ((int32_t)error_code == -1 || error_code == NULL)
+	// write(2, error_msg, ft_strlen(error_msg));
+	perror(error_msg);
+	if (yeet == true)
 	{
-		perror(error_msg);
 		free_at_exit();
-		if (yeet == true)
-			exit(EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	}
 }
 
@@ -48,7 +50,7 @@ void	check_error(void *error_code, char *error_msg, bool yeet)
 void	input_handler(int32_t argc)
 {
 	if (argc < 3)
-		check_error(-1, "Needs input file, at least one \
+		display_error("Needs input file, at least one \
 									cmd and an output file", true);
 }
 
@@ -56,6 +58,6 @@ void	input_handler(int32_t argc)
 void	input_handler(int32_t argc)
 {
 	if (argc != 5)
-		check_error(-1, "Needs to be exactly 4 arguments", true);
+		display_error("Needs to be exactly 4 arguments", true);
 }
 #endif

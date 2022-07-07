@@ -25,15 +25,17 @@
 typedef struct s_data
 {
 	int32_t	argc;
-	char	**argv; // free this
-	char	**path; // free this
-	char	**full_cmd; // free this
+	char	**argv;
+	char	**path;
+	char	**full_cmd;
+	int32_t	infile;
+	int32_t	outfile;
 }	t_data;
 
 // void	init_data(int argc, char **argv, t_data *data, char **envp);
 t_data	*data(void);
 void	init_data(int32_t argc, char **argv, char **envp);
-void	check_error(void *error_code, char *error_msg, bool yeet);
+void	display_error(char *error_msg, bool yeet);
 void	input_handler(int32_t argc);
 void	free_at_exit(void);
 

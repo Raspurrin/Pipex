@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 01:39:28 by mialbert          #+#    #+#             */
-/*   Updated: 2022/07/07 04:45:23 by mialbert         ###   ########.fr       */
+/*   Updated: 2022/07/08 01:04:23 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,9 @@ t_data	*data(void)
 
 	if (!data1)
 	{
-		check_error(malloc(sizeof(t_data)), \
-			"data malloc failed in init_static()", true);
+		data1 = malloc(sizeof(t_data));
+		if (!data1)
+			display_error("data malloc failed in init_static()", true);
 	}
 	return (data1);
 }
