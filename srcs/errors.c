@@ -6,20 +6,20 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 17:48:54 by mialbert          #+#    #+#             */
-/*   Updated: 2022/07/07 23:17:50 by mialbert         ###   ########.fr       */
+/*   Updated: 2022/07/08 03:43:27 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-void	free_at_exit(void)
+void	free_at_exit(t_data *data)
 {
-	if (data()->argv)
-		free(data()->argv);
-	if (data()->full_cmd)
-		free(data()->full_cmd);
-	if (data()->path)
-		free(data()->path);
+	if (data->argv)
+		free(data->argv);
+	if (data->full_cmd)
+		free(data->full_cmd);
+	if (data->path)
+		free(data->path);
 }
 
 /**
@@ -28,13 +28,12 @@ void	free_at_exit(void)
  * @param error_msg Including an error message of my own.
  * @param yeet If true, this program will exit.
  */
-void	display_error(char *error_msg, bool yeet)
+void	display_error(t_data *data, char *error_msg, bool yeet)
 {
-	// write(2, error_msg, ft_strlen(error_msg));
 	perror(error_msg);
 	if (yeet == true)
 	{
-		free_at_exit();
+		free_at_exit(data);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -47,17 +46,17 @@ void	display_error(char *error_msg, bool yeet)
  * Mandatory part should only use one infile, outfile and 2 commands.
  */
 #ifdef BONUS // for multiple arguments
-void	input_handler(int32_t argc)
+void	input_handler(t_data *data, int32_t argc)
 {
 	if (argc < 3)
-		display_error("Needs input file, at least one \
+		display_error(data, "Needs input file, at least one \
 									cmd and an output file", true);
 }
 
 #else // for one infile, outfile and 2 commands + program name.
-void	input_handler(int32_t argc)
+void	input_handler(t_data *data, int32_t argc)
 {
 	if (argc != 5)
-		display_error("Needs to be exactly 4 arguments", true);
+		display_error(data, "Needs to be exactly 4 arguments", true);
 }
 #endif
