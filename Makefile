@@ -6,7 +6,7 @@
 #    By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/08 18:53:57 by mialbert          #+#    #+#              #
-#    Updated: 2022/07/08 05:49:13 by mialbert         ###   ########.fr        #
+#    Updated: 2022/07/08 22:09:07 by mialbert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME	= pipex
 CFLAGS	= -Wall -Werror -Wextra
 HEADER	= -I includes -I libs/libft/srcs
 LIBFT	= ./libs/libft/srcs/
-DEBUG	= 
+DEBUG	= -fsanitize=address
 SRCS	=	./srcs/init.c \
 			./srcs/errors.c \
 			./srcs/execution.c \

@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 18:48:19 by mialbert          #+#    #+#             */
-/*   Updated: 2022/07/08 19:03:45 by mialbert         ###   ########.fr       */
+/*   Updated: 2022/07/08 22:08:28 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,16 @@ static char	*find_path(t_data *data, size_t	argv_i)
 	{
 		path = ft_strjoin(data->path[i - 1], cmd);
 		if (access(path, F_OK | X_OK) == 0)
+		{
+			printf("access: %s", path);
 			return (free(cmd), path);
+		}
 		else
 			free(path);
 	}
 	free(cmd);
-	return (NULL);
+	perror("find_path");
+	return (path);
 }
 
 /**
@@ -52,6 +56,7 @@ void	child_cmd(t_data *data, size_t i, char **envp, int32_t fd[2])
 	char	*path;
 
 	path = find_path(data, i + 1);
+	printf("test: %s", path);
 	if (i == (size_t)data->argc - 4)
 		dup2(data->outfile, STDOUT_FILENO);
 	else
@@ -60,6 +65,7 @@ void	child_cmd(t_data *data, size_t i, char **envp, int32_t fd[2])
 	close(fd[1]);
 	if (execve(path, data->full_cmd, envp) == -1)
 		display_error(data, "execve failed", true);
+	free_at_exit(data);
 }
 
 /**

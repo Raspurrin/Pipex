@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 03:43:43 by mialbert          #+#    #+#             */
-/*   Updated: 2022/07/08 19:10:04 by mialbert         ###   ########.fr       */
+/*   Updated: 2022/07/08 21:21:17 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@
  * A heredoc is a file literal. It is a multi-line string taken from STDIN
  * ended by a delimiter. It is then treated as an input file.
  * I create a temporary file where I store everything until the delimiter
- * is used.
+ * is used and then delete it 
  */
 static void	here_doc(t_data *data)
 {
 	char	*line;
 
-	data->infile = open(data->argv[0], O_RDWR | O_CREAT | O_TRUNC, 0666);
+	data->infile = open(data->argv[0], O_RDWR | O_CREAT, 0666);
 	if (data->infile == -1)
 		display_error(data, "Heredoc inout_files, Open infile failed", true);
 	while (ft_strncmp(line, data->argv[1], ft_strlen(data->argv[1]) != 0))
@@ -31,8 +31,8 @@ static void	here_doc(t_data *data)
 		line = get_next_line(STDIN_FILENO);
 		write (data->infile, line, ft_strlen(line));
 	}
-	dup2(data->infile, STDIN_FILENO);
-	unlink("./here_doc");
+	// dup2(data->infile, STDIN_FILENO);
+	// unlink("./here_doc");
 	data->outfile = open(data->argv[data->argc - 2], O_RDWR | O_CREAT \
 														| O_APPEND, 0666);
 	if (data->outfile == -1)
@@ -45,10 +45,10 @@ int32_t	inout_files(t_data *data)
 		return (here_doc(data), 1);
 	else
 	{
-		data->infile = open(data->argv[0], O_RDONLY | O_TRUNC, 0666);
+		data->infile = open(data->argv[0], O_RDONLY, 0666);
 		if (data->infile == -1)
 			display_error(data, "Bonus inout_files, Open infile failed", \
-																	false);
+																	true);
 		data->outfile = open(data->argv[data->argc - 2], O_RDWR | O_CREAT \
 															| O_TRUNC, 0666);
 		if (data->outfile == -1)
@@ -70,11 +70,13 @@ int32_t	inout_files(t_data *data)
 {
 	data->infile = open(data->argv[0], O_RDONLY);
 	if (data->infile == -1)
-		display_error(data, "inout_files, Open infile failed", false);
+		display_error(data, "inout_files, Open infile failed", true);
 	data->outfile = open(data->argv[data->argc - 2], O_RDWR | O_CREAT \
 														| O_TRUNC, 0666);
 	if (data->outfile == -1)
-		display_error(data, "inout_files, Open outfile failed", false);
+		display_error(data, "inout_files, Open outfile failed", true);
 	return (0);
 }
 #endif
+
+// exact width integer
