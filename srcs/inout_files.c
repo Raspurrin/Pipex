@@ -6,12 +6,13 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 03:43:43 by mialbert          #+#    #+#             */
-/*   Updated: 2022/07/08 05:44:38 by mialbert         ###   ########.fr       */
+/*   Updated: 2022/07/08 05:48:06 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
+#ifdef BONUS
 /**
  * A heredoc is a file literal. It is a multi-line string taken from STDIN
  * ended by a delimiter. It is then treated as an input file.
@@ -36,7 +37,7 @@ static void	here_doc(t_data *data)
 		display_error(data, "Bonus inout_files, Open outfile failed", false);
 }
 
-#ifdef BONUS // With heredoc instead of infile! 
+
 int32_t	inout_files(t_data *data)
 {
 	if (ft_strncmp(data->argv[0], "here_doc", 9) == 0)

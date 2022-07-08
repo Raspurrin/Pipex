@@ -6,13 +6,13 @@
 #    By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/08 18:53:57 by mialbert          #+#    #+#              #
-#    Updated: 2022/07/08 05:43:25 by mialbert         ###   ########.fr        #
+#    Updated: 2022/07/08 05:49:13 by mialbert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC		= clang
 NAME	= pipex
-# CFLAGS	= -Wall -Werror -Wextra
+CFLAGS	= -Wall -Werror -Wextra
 HEADER	= -I includes -I libs/libft/srcs
 LIBFT	= ./libs/libft/srcs/
 DEBUG	= 
@@ -41,7 +41,7 @@ $(NAME): $(OBJS)
 
 bonus: $(OBJS)
 	@echo "${PURPLE}======== Bonus... ========${NC}"
-	$(CC)  -g $(CFLAGS) -D BONUS=1 $(HEADER) $(LIBFT)libft.a $(OBJS) $(DEBUG) -o $(NAME)
+	$(CC)  -g $(CFLAGS) -D BONUS=1 $(HEADER) $(LIBFT)libft.a $(SRCS) $(DEBUG) -o $(NAME)
 
 clean:
 	@rm -f $(OBJS)
