@@ -6,7 +6,7 @@
 #    By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/08 18:53:57 by mialbert          #+#    #+#              #
-#    Updated: 2022/07/08 03:58:47 by mialbert         ###   ########.fr        #
+#    Updated: 2022/07/08 05:18:00 by mialbert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,8 +29,6 @@ GREEN 	:= \033[0;32m
 BLUE 	:= \033[0;34m
 PURPLE	:= \033[0;35m
 
-MSG		:= Compiling...
-
 all: libft $(NAME)
 
 libft:
@@ -38,13 +36,12 @@ libft:
 	@$(MAKE) -C $(LIBFT)
 
 $(NAME): $(OBJS)
-	$(eval MSG = Bonus...)
-	@echo "${PURPLE}======== $(MSG) ========${NC}"
+	@echo "${PURPLE}======== Compiling ========${NC}"
 	$(CC) $(BONUS) -g $(CFLAGS) $(HEADER) $(LIBFT)libft.a $(OBJS) $(DEBUG) -o $(NAME)
 
-bonus: $(OBJS)
+bonus: 
 	@echo "${PURPLE}======== Bonus... ========${NC}"
-	$(CC)  -g $(CFLAGS) -D BONUS=1 $(HEADER) $(LIBFT)libft.a $(OBJS) $(DEBUG) -o $(NAME)
+	$(CC)  -g $(CFLAGS) -D BONUS=1 $(HEADER) $(LIBFT)libft.a $(SRCS) $(DEBUG) -o $(NAME)
 
 clean:
 	@rm -f $(OBJS)

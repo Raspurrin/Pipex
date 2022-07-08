@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 18:48:19 by mialbert          #+#    #+#             */
-/*   Updated: 2022/07/08 04:00:21 by mialbert         ###   ########.fr       */
+/*   Updated: 2022/07/08 05:13:39 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,9 @@ void	child_cmd(t_data *data, size_t i, char **envp, int32_t fd[2])
 
 	path = find_path(data, i + 1);
 	if (i == (size_t)data->argc - 4)
-	{
-		if (dup2(data->outfile, STDOUT_FILENO) == -1)
-			display_error(data, "child_cmd, last dup2 failed: ", true);
-	}
+		dup2(data->outfile, STDOUT_FILENO);
 	else
-	{
-		if (dup2(fd[1], STDOUT_FILENO) == -1)
-			display_error(data, "child_cmd, dup2 failed: ", true);
-	}
+		dup2(fd[1], STDOUT_FILENO);
 	close(fd[0]);
 	close(fd[1]);
 	if (execve(path, data->full_cmd, envp) == -1)
@@ -81,19 +75,17 @@ static void	exec_cmds(t_data *data, char **envp)
 	int32_t	fd[2];
 
 	i = inout_files(data);
-	if (dup2(data->infile, STDIN_FILENO) == -1)
-		display_error(data, "inout_files, dup2 failed: ", true);
+	dup2(data->infile, STDIN_FILENO);
 	while (i < (size_t)data->argc - 3)
 	{
 		pipe(fd);
 		pid = fork();
 		if (pid == -1)
-			display_error(data, "fork failed: ", true);
+			display_error(data, "fork failed", true);
 		if (pid == 0)
 			child_cmd(data, i, envp, fd);
 		waitpid(pid, NULL, 0);
-		if (dup2(fd[0], STDIN_FILENO) == -1)
-			display_error(data, "exec_cmds, dup2 failed: ", true);
+		dup2(fd[0], STDIN_FILENO);
 		close(fd[0]);
 		close(fd[1]);
 		i++;
