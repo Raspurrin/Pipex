@@ -6,32 +6,39 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 17:48:54 by mialbert          #+#    #+#             */
-/*   Updated: 2022/07/13 17:28:14 by mialbert         ###   ########.fr       */
+/*   Updated: 2022/07/13 22:08:57 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-void	free_2d(char **map)
+
+void	free_2d(char ***arr)
 {
-	
-	while (*map)
+	size_t	i;
+
+	i = 0;
+	if (*arr)
 	{
-		// printf("yo\n");
-		free(*map);
-		map++;
+		while ((*arr)[i])
+		{
+			free((*arr)[i]);
+			(*arr)[i] = NULL;
+			i++;
+		}
+		free(*arr);
+		*arr = NULL;
 	}
-	return ;
 }
 
 void	free_at_exit(t_data *data)
 {
 	if (data->argv)
-		free_2d(data->argv);
+		free_2d(&data->argv);
 	if (data->full_cmd)
-		free_2d(data->full_cmd);
+		free_2d(&data->full_cmd);
 	if (data->path)
-		free_2d(data->path);
+		free_2d(&data->path);
 }
 
 /**

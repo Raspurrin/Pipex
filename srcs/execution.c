@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 18:48:19 by mialbert          #+#    #+#             */
-/*   Updated: 2022/07/13 17:56:15 by mialbert         ###   ########.fr       */
+/*   Updated: 2022/07/13 22:09:12 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,15 +100,19 @@ static void	exec_cmds(t_data *data, char **envp)
 	close(data->infile);
 }
 
+
+
 int32_t	main(int32_t argc, char **argv, char **envp)
 {
 	t_data	data;
 
+	ft_bzero(&data, sizeof(t_data));
 	if (!input_handler(argc)) // somehow not using free_at_exit gets rid of some segfault and such
 		return (EXIT_FAILURE);
 	init_data(&data, argc, argv, envp);
 	exec_cmds(&data, envp);
 	free_at_exit(&data);
+
 	return (0);
 }
 
