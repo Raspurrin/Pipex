@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 18:48:19 by mialbert          #+#    #+#             */
-/*   Updated: 2022/07/13 17:02:30 by mialbert         ###   ########.fr       */
+/*   Updated: 2022/07/13 17:56:15 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,9 @@ static char	*find_path(t_data *data, size_t	argv_i)
 	size_t	i;
 	char	*cmd;
 	char	*path;
-	char	**full_cmd;
 
 	i = 0;
-	full_cmd = ft_split(data->argv[argv_i], ' ');
-	data->full_cmd = full_cmd;
+	data->full_cmd = ft_split(data->argv[argv_i], ' ');
 	cmd = ft_strjoin("/", data->full_cmd[0]);
 	while (data->path[i++])
 	{
@@ -59,8 +57,15 @@ void	child_cmd(t_data *data, size_t i, char **envp, int32_t fd[2])
 	close(fd[0]);
 	close(fd[1]);
 	if (execve(path, data->full_cmd, envp) == -1)
+	{
+		free(path);
 		display_error(data, "execve failed", true);
-	free_at_exit(data);
+	}
+	// execve(path, data->full_cmd, envp);
+	// free(path);
+	// display_error(data, "execve failed", true);
+	// free_at_exit(data);
+	// free(path);
 }
 
 /**

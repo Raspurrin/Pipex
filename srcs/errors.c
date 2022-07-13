@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 17:48:54 by mialbert          #+#    #+#             */
-/*   Updated: 2022/07/13 16:57:32 by mialbert         ###   ########.fr       */
+/*   Updated: 2022/07/13 17:28:14 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	display_error(t_data *data, char *error_msg, bool yeet)
 	perror(error_msg);
 	if (yeet == true)
 	{
-		// free_at_exit(data);
+		free_at_exit(data);
 		exit(EXIT_FAILURE);
 	}
 }
