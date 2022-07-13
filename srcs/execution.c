@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 18:48:19 by mialbert          #+#    #+#             */
-/*   Updated: 2022/07/13 22:09:12 by mialbert         ###   ########.fr       */
+/*   Updated: 2022/07/13 23:07:26 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,8 @@ int32_t	main(int32_t argc, char **argv, char **envp)
 	init_data(&data, argc, argv, envp);
 	exec_cmds(&data, envp);
 	free_at_exit(&data);
-
+	// char *string = "first";
+	// printf("%d\n", ft_strncmp("first", string, ft_strlen(string) + 1));
 	return (0);
 }
 

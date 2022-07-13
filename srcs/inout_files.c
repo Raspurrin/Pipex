@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 03:43:43 by mialbert          #+#    #+#             */
-/*   Updated: 2022/07/08 21:21:17 by mialbert         ###   ########.fr       */
+/*   Updated: 2022/07/13 23:18:44 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,30 @@
 static void	here_doc(t_data *data)
 {
 	char	*line;
-
+	int		i;
+	
 	data->infile = open(data->argv[0], O_RDWR | O_CREAT, 0666);
 	if (data->infile == -1)
 		display_error(data, "Heredoc inout_files, Open infile failed", true);
-	while (ft_strncmp(line, data->argv[1], ft_strlen(data->argv[1]) != 0))
+	// printf("%zu\n", ft_strlen(data->argv[1]));
+	// line = get_next_line(STDIN_FILENO);
+	while (1)
 	{
 		line = get_next_line(STDIN_FILENO);
-		write (data->infile, line, ft_strlen(line));
+		i = ft_strncmp(line, data->argv[1], ft_strlen(data->argv[1]) + 1);
+		// printf("%d\n", i);
+		// ft_putstr_fd(line, 2);
+		if (i != 10)
+		{
+			write (data->infile, line, ft_strlen(line));
+			free(line);
+		}
+		else
+		{
+			free(line);
+			break ;
+		}
+		// printf("%s %s\n", data->argv[1], line);
 	}
 	// dup2(data->infile, STDIN_FILENO);
 	// unlink("./here_doc");
@@ -80,3 +96,5 @@ int32_t	inout_files(t_data *data)
 #endif
 
 // exact width integer
+
+
