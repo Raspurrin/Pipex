@@ -6,20 +6,22 @@
 #    By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/08 18:53:57 by mialbert          #+#    #+#              #
-#    Updated: 2022/07/08 22:09:07 by mialbert         ###   ########.fr        #
+#    Updated: 2022/07/13 16:34:24 by mialbert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC		= clang
 NAME	= pipex
-CFLAGS	= -Wall -Werror -Wextra
+#CFLAGS	= -Wall -Werror -Wextra
 HEADER	= -I includes -I libs/libft/srcs
 LIBFT	= ./libs/libft/srcs/
-DEBUG	= -fsanitize=address
+#DEBUG	= -fsanitize=address
 SRCS	=	./srcs/init.c \
 			./srcs/errors.c \
 			./srcs/execution.c \
 			./srcs/inout_files.c
+
+LIBFTSRCS = ./libs/libft/srcs/*.c
 
 OBJS	= $(SRCS:.c=.o)
 
@@ -31,17 +33,23 @@ PURPLE	:= \033[0;35m
 
 all: libft $(NAME)
 
+# %.o : %.c 
+# 	%(CC) $(CFLAGS) -c $< -o $@
+
 libft:
 	@echo "\n${BLUE}======== libft ========${NC}"
 	@$(MAKE) -C $(LIBFT)
 
 $(NAME): $(OBJS)
 	@echo "${PURPLE}======== Compiling ========${NC}"
-	$(CC) $(BONUS) -g $(CFLAGS) $(HEADER) $(LIBFT)libft.a $(OBJS) $(DEBUG) -o $(NAME)
+	$(CC) -g $(HEADER) -L$(LIBFT) $(OBJS) $(DEBUG) -lft -o $(NAME)
+# undefined reference to main if using OBJS
+# undefined reference to libft functions when using $(LIBFT)/libft.a
+
 
 bonus: $(OBJS)
 	@echo "${PURPLE}======== Bonus... ========${NC}"
-	$(CC)  -g $(CFLAGS) -D BONUS=1 $(HEADER) $(LIBFT)libft.a $(SRCS) $(DEBUG) -o $(NAME)
+	$(CC) -D BONUS=1 $(HEADER) -L$(LIBFT) $(SRCS) $(DEBUG) -lft -o $(NAME)
 
 clean:
 	@rm -f $(OBJS)

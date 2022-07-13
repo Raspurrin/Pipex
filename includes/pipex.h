@@ -20,8 +20,11 @@
 # include <stdint.h>
 # include <stdbool.h>
 # include <stdlib.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 # include "../libs/libft/srcs/libft.h"
 
+// the fall from BLUE STAHLI
 typedef struct s_data
 {
 	int32_t	argc;
@@ -36,7 +39,7 @@ typedef struct s_data
 t_data	*data(t_data *data);
 void	init_data(t_data *data, int32_t argc, char **argv, char **envp);
 void	display_error(t_data *data, char *error_msg, bool yeet);
-void	input_handler(t_data *data, int32_t argc);
+bool	input_handler(int32_t argc);
 void	free_at_exit(t_data *data);
 int32_t	inout_files(t_data *data);
 

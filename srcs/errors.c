@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 17:48:54 by mialbert          #+#    #+#             */
-/*   Updated: 2022/07/08 22:15:39 by mialbert         ###   ########.fr       */
+/*   Updated: 2022/07/13 16:57:32 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 void	free_2d(char **map)
 {
+	
 	while (*map)
 	{
+		// printf("yo\n");
 		free(*map);
 		map++;
 	}
@@ -43,7 +45,7 @@ void	display_error(t_data *data, char *error_msg, bool yeet)
 	perror(error_msg);
 	if (yeet == true)
 	{
-		free_at_exit(data);
+		// free_at_exit(data);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -56,17 +58,19 @@ void	display_error(t_data *data, char *error_msg, bool yeet)
  * Mandatory part should only use one infile, outfile and 2 commands.
  */
 #ifdef BONUS // for multiple arguments
-void	input_handler(t_data *data, int32_t argc)
+bool	input_handler(int32_t argc)
 {
 	if (argc < 3)
-		display_error(data, "Needs input file, at least one \
-									cmd and an output file", true);
+		return (ft_putendl_fd("Needs input file, at least one \
+								cmd and an output file", STDERR_FILENO), false);
+	return (true);
 }
 
 #else // for one infile, outfile and 2 commands + program name.
-void	input_handler(t_data *data, int32_t argc)
+bool	input_handler(int32_t argc)
 {
 	if (argc != 5)
-		display_error(data, "Needs to be exactly 4 arguments", true);
+		return (ft_putendl_fd("Needs to be exactly 4 arguments", STDERR_FILENO), false);
+	return (true);
 }
 #endif

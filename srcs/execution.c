@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 18:48:19 by mialbert          #+#    #+#             */
-/*   Updated: 2022/07/08 22:08:28 by mialbert         ###   ########.fr       */
+/*   Updated: 2022/07/13 17:02:30 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,12 @@ static char	*find_path(t_data *data, size_t	argv_i)
 	{
 		path = ft_strjoin(data->path[i - 1], cmd);
 		if (access(path, F_OK | X_OK) == 0)
-		{
-			printf("access: %s", path);
 			return (free(cmd), path);
-		}
 		else
 			free(path);
 	}
 	free(cmd);
-	perror("find_path");
-	return (path);
+	return (display_error(data, "path failed", true), NULL);
 }
 
 /**
@@ -56,7 +52,6 @@ void	child_cmd(t_data *data, size_t i, char **envp, int32_t fd[2])
 	char	*path;
 
 	path = find_path(data, i + 1);
-	printf("test: %s", path);
 	if (i == (size_t)data->argc - 4)
 		dup2(data->outfile, STDOUT_FILENO);
 	else
@@ -104,9 +99,12 @@ int32_t	main(int32_t argc, char **argv, char **envp)
 {
 	t_data	data;
 
-	input_handler(&data, argc);
+	if (!input_handler(argc)) // somehow not using free_at_exit gets rid of some segfault and such
+		return (EXIT_FAILURE);
 	init_data(&data, argc, argv, envp);
 	exec_cmds(&data, envp);
 	free_at_exit(&data);
 	return (0);
 }
+
+// I'll tend to the flame, you can worship the ashes - bard song

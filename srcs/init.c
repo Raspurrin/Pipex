@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 01:39:28 by mialbert          #+#    #+#             */
-/*   Updated: 2022/07/08 21:24:51 by mialbert         ###   ########.fr       */
+/*   Updated: 2022/07/11 01:24:44 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 void	init_data(t_data *data, int32_t argc, char **argv, char **envp)
 {
 	size_t	i;
-	char	**path;
+	char	*tmp;
 
 	i = 0;
 	data->argc = argc;
@@ -32,13 +32,13 @@ void	init_data(t_data *data, int32_t argc, char **argv, char **envp)
 	data->argv[i - 1] = NULL;
 	while (*envp != NULL)
 	{
-		if (!ft_strncmp("PATH", *envp, 4))
+		if (ft_strncmp("PATH", *envp, 4) == 0)
 		{
-			path = ft_split(*envp, ':');
-			data->path = path;
-			free (data->path[0]);
-			data->path[0] = ft_substr(data->path[0], 5, \
+			data->path = ft_split(*envp, ':');
+			tmp = ft_substr(data->path[0], 5, \
 							ft_strlen(data->path[0]) - 5);
+			free (data->path[0]);
+			data->path[0] = tmp;
 		}
 		envp++;
 	}
