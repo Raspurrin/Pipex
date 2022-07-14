@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 03:43:43 by mialbert          #+#    #+#             */
-/*   Updated: 2022/07/14 15:13:32 by mialbert         ###   ########.fr       */
+/*   Updated: 2022/07/15 01:31:23 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,33 +22,19 @@
 static void	here_doc(t_data *data)
 {
 	char	*line;
-	int		i;
 
+	line = ft_calloc(2, 1);
 	data->infile = open(data->argv[0], O_RDWR | O_CREAT, 0666);
 	if (data->infile == -1)
 		display_error(data, "Heredoc inout_files, Open infile failed", true);
-	// printf("%zu\n", ft_strlen(data->argv[1]));
-	// line = get_next_line(STDIN_FILENO);
-	while (1)
+	while (ft_strncmp(line, data->argv[1], ft_strlen(data->argv[1]) + 1) != 10)
 	{
+		free(line);
 		line = get_next_line(STDIN_FILENO);
-		i = ft_strncmp(line, data->argv[1], ft_strlen(data->argv[1]) + 1);
-		// printf("%d\n", i);
-		// ft_putstr_fd(line, 2);
-		if (i != 10)
-		{
-			write (data->infile, line, ft_strlen(line));
-			free(line);
-		}
-		else
-		{
-			free(line);
-			break ;
-		}
-		// printf("%s %s\n", data->argv[1], line);
+		write (data->infile, line, ft_strlen(line));
 	}
-	// dup2(data->infile, STDIN_FILENO);
-	// unlink("./here_doc");
+	dup2(data->infile, STDIN_FILENO);
+	unlink("./here_doc");
 	data->outfile = open(data->argv[data->argc - 2], O_RDWR | O_CREAT \
 														| O_APPEND, 0666);
 	if (data->outfile == -1)
@@ -66,11 +52,12 @@ int32_t	inout_files(t_data *data)
 			display_error(data, "Bonus inout_files, Open infile failed", \
 																	true);
 		data->outfile = open(data->argv[data->argc - 2], O_RDWR | O_CREAT \
-															| O_TRUNC, 0666);
+															| O_APPEND, 0666);
 		if (data->outfile == -1)
 			display_error(data, "Bonus inout_files, Open outfile failed", \
 																	false);
 	}
+	dup2(data->infile, STDIN_FILENO);
 	return (0);
 }
 
@@ -91,6 +78,7 @@ int32_t	inout_files(t_data *data)
 														| O_TRUNC, 0666);
 	if (data->outfile == -1)
 		display_error(data, "inout_files, Open outfile failed", true);
+	dup2(data->infile, STDIN_FILENO);
 	return (0);
 }
 #endif

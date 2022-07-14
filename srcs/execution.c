@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 18:48:19 by mialbert          #+#    #+#             */
-/*   Updated: 2022/07/13 23:07:26 by mialbert         ###   ########.fr       */
+/*   Updated: 2022/07/15 01:23:59 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,7 @@ void	child_cmd(t_data *data, size_t i, char **envp, int32_t fd[2])
 		free(path);
 		display_error(data, "execve failed", true);
 	}
-	// execve(path, data->full_cmd, envp);
-	// free(path);
-	// display_error(data, "execve failed", true);
-	// free_at_exit(data);
-	// free(path);
+	execve(path, data->full_cmd, envp);
 }
 
 /**
@@ -81,7 +77,6 @@ static void	exec_cmds(t_data *data, char **envp)
 	int32_t	fd[2];
 
 	i = inout_files(data);
-	dup2(data->infile, STDIN_FILENO);
 	while (i < (size_t)data->argc - 3)
 	{
 		pipe(fd);
@@ -100,21 +95,15 @@ static void	exec_cmds(t_data *data, char **envp)
 	close(data->infile);
 }
 
-
-
 int32_t	main(int32_t argc, char **argv, char **envp)
 {
 	t_data	data;
 
 	ft_bzero(&data, sizeof(t_data));
-	if (!input_handler(argc)) // somehow not using free_at_exit gets rid of some segfault and such
+	if (!input_handler(argc))
 		return (EXIT_FAILURE);
 	init_data(&data, argc, argv, envp);
 	exec_cmds(&data, envp);
 	free_at_exit(&data);
-	// char *string = "first";
-	// printf("%d\n", ft_strncmp("first", string, ft_strlen(string) + 1));
 	return (0);
 }
-
-// I'll tend to the flame, you can worship the ashes - bard song

@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 17:48:54 by mialbert          #+#    #+#             */
-/*   Updated: 2022/07/14 22:23:06 by mialbert         ###   ########.fr       */
+/*   Updated: 2022/07/15 00:17:51 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ void	display_error(t_data *data, char *error_msg, bool yeet)
 #ifdef BONUS // for multiple arguments
 bool	input_handler(int32_t argc)
 {
-	if (argc < 3)
-		return (ft_putendl_fd("Needs input file, at least one \
-								cmd and an output file", STDERR_FILENO), false);
+	if (argc < 5)
+		return (ft_putendl_fd("Needs input file, at least two \
+								commands and an output file", STDERR_FILENO), false);
 	return (true);
 }
 
