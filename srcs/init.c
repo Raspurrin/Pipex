@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 01:39:28 by mialbert          #+#    #+#             */
-/*   Updated: 2022/07/14 22:23:45 by mialbert         ###   ########.fr       */
+/*   Updated: 2022/07/15 01:39:32 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	init_data(t_data *data, int32_t argc, char **argv, char **envp)
 	data->argc = argc;
 	data->argv = malloc((argc) * sizeof(char *));
 	while (i++ < (size_t)argc - 1)
-		data->argv[i - 1] = ft_strdup(argv[i]); // change this pls later maybe? ...Or not >:]
+		data->argv[i - 1] = ft_strdup(argv[i]);
 	data->argv[i - 1] = NULL;
 	while (*envp != NULL)
 	{

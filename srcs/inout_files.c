@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 03:43:43 by mialbert          #+#    #+#             */
-/*   Updated: 2022/07/15 01:36:10 by mialbert         ###   ########.fr       */
+/*   Updated: 2022/07/15 01:39:10 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,3 @@ int32_t	inout_files(t_data *data)
 	return (0);
 }
 #endif
-
-// exact width integer
-
-

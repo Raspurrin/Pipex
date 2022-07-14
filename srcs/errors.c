@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 17:48:54 by mialbert          #+#    #+#             */
-/*   Updated: 2022/07/15 00:17:51 by mialbert         ###   ########.fr       */
+/*   Updated: 2022/07/15 01:38:35 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ bool	input_handler(int32_t argc)
 {
 	if (argc < 5)
 		return (ft_putendl_fd("Needs input file, at least two \
-								commands and an output file", STDERR_FILENO), false);
+						commands and an output file", STDERR_FILENO), false);
 	return (true);
 }
 
@@ -58,7 +58,8 @@ bool	input_handler(int32_t argc)
 bool	input_handler(int32_t argc)
 {
 	if (argc != 5)
-		return (ft_putendl_fd("Needs to be exactly 4 arguments", STDERR_FILENO), false);
+		return (ft_putendl_fd("Needs to be exactly 4 arguments", \
+													STDERR_FILENO), false);
 	return (true);
 }
 #endif
