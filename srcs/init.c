@@ -6,22 +6,11 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 01:39:28 by mialbert          #+#    #+#             */
-/*   Updated: 2022/07/13 20:57:22 by mialbert         ###   ########.fr       */
+/*   Updated: 2022/07/14 22:23:45 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
-
-
-void print_2d_array(char **arr)
-{
-	int i = 0;
-	while(arr[i])
-	{
-		printf("%s\n", arr[i]);
-		i++;
-	}
-}
 
 /**
  * Initialising argc, argv and paths in my data struct. 

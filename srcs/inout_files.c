@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 03:43:43 by mialbert          #+#    #+#             */
-/*   Updated: 2022/07/13 23:18:44 by mialbert         ###   ########.fr       */
+/*   Updated: 2022/07/14 15:13:32 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	here_doc(t_data *data)
 {
 	char	*line;
 	int		i;
-	
+
 	data->infile = open(data->argv[0], O_RDWR | O_CREAT, 0666);
 	if (data->infile == -1)
 		display_error(data, "Heredoc inout_files, Open infile failed", true);

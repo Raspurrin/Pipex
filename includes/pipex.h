@@ -42,7 +42,4 @@ void	display_error(t_data *data, char *error_msg, bool yeet);
 bool	input_handler(int32_t argc);
 void	free_at_exit(t_data *data);
 int32_t	inout_files(t_data *data);
-
-void print_2d_array(char **arr);
-void free_2d(char ***arr);
 #endif
