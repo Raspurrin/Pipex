@@ -6,7 +6,7 @@
 #    By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/08 18:53:57 by mialbert          #+#    #+#              #
-#    Updated: 2022/07/15 21:38:06 by mialbert         ###   ########.fr        #
+#    Updated: 2022/07/15 22:19:59 by mialbert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,12 +24,15 @@ SRCS	=	./srcs/init.c \
 
 OBJS	= $(SRCS:.c=.o)
 
-NC		:= \033[0m
-B_RED	:= \033[1;31m
-RED 	:= \033[0;31m
-GREEN 	:= \033[0;32m
-BLUE 	:= \033[0;34m
-PURPLE	:= \033[0;35m
+NC			:= \033[0m
+B_RED		:= \033[1;31m
+RED 		:= \033[0;31m
+B_GREEN		:= \033[1;32m
+GREEN 		:= \033[0;32m
+B_BLUE 		:= \033[1;34m
+BLUE 		:= \033[0;34m
+PURPLE		:= \033[0;35m
+B_PURPLE	:= \033[1;35m
 
 SUBM_STATE := $(shell find libs/libft -type f)
 
@@ -42,8 +45,9 @@ endif
 
 all: $(SUBM_STATE) $(LIBFT_A) $(NAME) 
 
-# %.o : %.c 
-# 	%(CC) $(CFLAGS) -c $< -o $@
+%.o : %.c 
+	@echo "$(B_BLUE)Compiling: $(BLUE)$(notdir $<) 🔨$(NC)"
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 submodule: 
 	git submodule init 
@@ -53,20 +57,19 @@ $(LIBFT_A):
 	@echo "\n${BLUE}======== libft ========${NC}"
 	@$(MAKE) -C $(LIBFT)
 
-$(NAME): $(SRCS)
-	@echo "${PURPLE}======== Compiling ========${NC}"
-	$(CC) $(HEADER) -L$(LIBFT) $(SRCS) $(DEBUG) -lft -o $(NAME)
+Pipex: 
+	@echo "${PURPLE}======== Pipex ========${NC}"
 
-# libs/libft/libft.a:
-# 	@$(MAKE) -C $(LIBFT)
+$(NAME): Pipex $(OBJS)
+	@$(CC) $(HEADER) -L$(LIBFT) $(SRCS) $(DEBUG) -lft -o $(NAME)
 
-bonus: $(OBJS)
+bonus: $(LIBFT_A) $(OBJS)
 	@echo "${PURPLE}======== Bonus... ========${NC}"
 	$(CC) -D BONUS=1 $(HEADER) -L$(LIBFT) $(SRCS) $(DEBUG) -lft -o $(NAME)
 
 clean:
 	@rm -f $(OBJS)
-	@echo "${B_RED}🧹 Cleaning: ${RED} $(OBJS)"
+	@echo "${B_RED}🧹 Cleaning: ${RED} $(notdir $(OBJS))"
 	@$(MAKE) -C $(LIBFT) fclean
 
 fclean: clean
