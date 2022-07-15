@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 01:39:28 by mialbert          #+#    #+#             */
-/*   Updated: 2022/07/15 02:01:34 by mialbert         ###   ########.fr       */
+/*   Updated: 2022/07/15 02:29:00 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@ void	init_data(t_data *data, int32_t argc, char **argv, char **envp)
 
 	i = 0;
 	data->argc = argc;
-	data->argv = malloc((argc) * sizeof(char *));
+	data->argv = malloc((argc + 1) * sizeof(char *));
 	while (i++ < (size_t)argc)
 		data->argv[i - 1] = ft_strdup(argv[i - 1]);
+	ft_printf_fd(STDERR_FILENO, "i: %d\n", i - 1);
 	data->argv[i - 1] = NULL;
 	while (*envp != NULL)
 	{
