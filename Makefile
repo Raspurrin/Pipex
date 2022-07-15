@@ -6,7 +6,7 @@
 #    By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/08 18:53:57 by mialbert          #+#    #+#              #
-#    Updated: 2022/07/15 20:39:37 by mialbert         ###   ########.fr        #
+#    Updated: 2022/07/15 21:38:06 by mialbert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ NAME	= pipex
 CFLAGS	= -Wall -Werror -Wextra
 HEADER	= -I includes -I libs/libft/srcs
 LIBFT	= ./libs/libft/
+LIBFT_A = libs/libft/libft.a # ???????????? Why 
 #DEBUG	= -fsanitize=address
 SRCS	=	./srcs/init.c \
 			./srcs/errors.c \
@@ -39,7 +40,7 @@ else
 SUBM_FLAG	= 
 endif
 
-all: $(SUBM_STATE) libft $(NAME)
+all: $(SUBM_STATE) $(LIBFT_A) $(NAME) 
 
 # %.o : %.c 
 # 	%(CC) $(CFLAGS) -c $< -o $@
@@ -48,7 +49,7 @@ submodule:
 	git submodule init 
 	git submodule update
 
-libft:
+$(LIBFT_A):
 	@echo "\n${BLUE}======== libft ========${NC}"
 	@$(MAKE) -C $(LIBFT)
 
@@ -56,18 +57,21 @@ $(NAME): $(SRCS)
 	@echo "${PURPLE}======== Compiling ========${NC}"
 	$(CC) $(HEADER) -L$(LIBFT) $(SRCS) $(DEBUG) -lft -o $(NAME)
 
+# libs/libft/libft.a:
+# 	@$(MAKE) -C $(LIBFT)
+
 bonus: $(OBJS)
 	@echo "${PURPLE}======== Bonus... ========${NC}"
 	$(CC) -D BONUS=1 $(HEADER) -L$(LIBFT) $(SRCS) $(DEBUG) -lft -o $(NAME)
 
 clean:
 	@rm -f $(OBJS)
-	@echo "${B_RED}Cleaning: ${RED} $(OBJS)"
+	@echo "${B_RED}🧹 Cleaning: ${RED} $(OBJS)"
 	@$(MAKE) -C $(LIBFT) fclean
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "${B_RED}Cleaning: ${RED} $(NAME)"
+	@echo "${B_RED}🧹 Cleaning: ${RED} $(NAME)"
 
 re: fclean all
 
