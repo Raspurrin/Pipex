@@ -22,7 +22,7 @@
 # include <stdlib.h>
 # include <sys/types.h>
 # include <sys/wait.h>
-# include "../libs/libft/srcs/libft.h"
+# include "../libs/libft/includes/libft.h"
 
 // the fall from BLUE STAHLI
 typedef struct s_data
