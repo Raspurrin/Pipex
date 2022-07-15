@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 03:43:43 by mialbert          #+#    #+#             */
-/*   Updated: 2022/07/15 17:39:06 by mialbert         ###   ########.fr       */
+/*   Updated: 2022/07/15 17:53:09 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ int32_t	inout_files(t_data *data)
 		return (here_doc(data), 1);
 	else
 	{
-		ft_printf_fd(STDERR_FILENO, "yo: %s\n", data->argv[1]);
-		print_2d_fd(data->argv, STDERR_FILENO);
 		data->infile = open(data->argv[1], O_RDONLY, 0666);
 		if (data->infile == -1)
 			display_error(data, "Bonus inout_files, Open infile failed", \
