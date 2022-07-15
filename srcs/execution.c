@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 18:48:19 by mialbert          #+#    #+#             */
-/*   Updated: 2022/07/15 01:23:59 by mialbert         ###   ########.fr       */
+/*   Updated: 2022/07/15 02:01:51 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	child_cmd(t_data *data, size_t i, char **envp, int32_t fd[2])
 {
 	char	*path;
 
-	path = find_path(data, i + 1);
+	path = find_path(data, i + 2);
 	if (i == (size_t)data->argc - 4)
 		dup2(data->outfile, STDOUT_FILENO);
 	else
