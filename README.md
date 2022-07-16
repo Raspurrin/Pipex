@@ -40,6 +40,7 @@ And you can use [waitpid()](https://linux.die.net/man/2/waitpid) to wait for a c
 
 ## How to communicate between different processes:
 Processes occupy different spaces of memory, so they exist in isolation from one another. So this is where the actual [pipe()](https://www.geeksforgeeks.org/pipe-system-call/) comes in! It is one type of [inter-process communication](https://en.wikipedia.org/wiki/Inter-process_communication) which facilitates communication between processes. It takes in an array of two integers, which it will use to create the two filedescriptors that are used for the ends of the pipe. The first element (fd[0] if given fd[2]) will be the read end and fd[1] will be the write end of the pipe. If something is written in the write end, it can be accessed from the other. Create the pipe before creating the child process you want to communicate with, so it gets inherited by the child.
+I highly recommend [this](https://www.youtube.com/watch?v=cex9XrZCU14&list=PLfqABt5AS4FkW5mOn2Tn9ZZLLDwA3kZUY) playlist from Codevault about processes.
 
 ## Redirecting pipes to the input/output of programs:
 The default way for a program to accept input/output is by using the STDIN and STDOUT stream. Every process by default opens these filedescriptors: 
@@ -56,5 +57,3 @@ So now if a program searches for input, it will take the input from the pipe!
 
 ## How to write good error messages: 
 Most functions from the standard library use Errno (from <errno.h>) which is an integer that can be set to certain macros which correspond with certain error messages. If you use [perror()](https://www.tutorialspoint.com/c_standard_library/c_function_perror.htm) it will print the last error message to STDERR set to errno by a function where an error occured and you can also add a custom string to be displayed beforehand. It uses STDERR because streams like STDOUT might be occupied/closed by the usage of dup for instance! It is important to check if functions return a certain value on failure and to make sure your program exits, frees things properly and displays a helpful error message, so it's easier to debug and maintain your code. 
-
-I highly recommend [this](https://www.youtube.com/watch?v=cex9XrZCU14&list=PLfqABt5AS4FkW5mOn2Tn9ZZLLDwA3kZUY) playlist from Codevault about processes.
