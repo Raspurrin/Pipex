@@ -28,7 +28,7 @@ If you type `env` you can see all environment variables. And if you type `env | 
 When you execute a command, these folders are searched for the right path for the given command and then executed. Essentially providing you with a shortcut, 
 so you don't have to type `bin/ls` or remember in which directory to find all these programs. 
 This behaviour is part of what we have to write in this project. We are not allowed to use execvpe() which would have done that for us.
-You can utilise the access() function for this, which checks for valid paths and the main argument envp, which is an array of strings containing the environment variables.
+You can utilise the [access()](https://linux.die.net/man/2/access) function for this, which checks for valid paths and the [main argument envp](http://crasseux.com/books/ctutorial/Environment-variables.html), which is an array of strings containing the environment variables.
 
 
 ## Why processes? 
