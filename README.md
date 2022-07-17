@@ -25,8 +25,11 @@ A here_doc is a multi string comment which is taken from STDIN. It will take inp
 ## Commands are programs!
 Commands like `ls` are actually programs! They can be found in the folders contained in the [environment variable](https://wiki.archlinux.org/title/environment_variables): PATH. 
 If you type `env` you can see all environment variables. And if you type `env | grep PATH` or `echo $PATH`, you will see everything contained in PATH.
-When you execute a command, these folders are searched for the command specified and then executed. Essentially providing you with a shortcut, 
+When you execute a command, these folders are searched for the right path for the given command and then executed. Essentially providing you with a shortcut, 
 so you don't have to type `bin/ls` or remember in which directory to find all these programs. 
+This behaviour is part of what we have to write in this project. We are not allowed to use execvpe() which would have done that for us.
+You can utilise the access() function for this, which checks for valid paths and the main argument envp, which is an array of strings containing the environment variables.
+
 
 ## Why processes? 
 To execute these programs in your own program, you need to use one of the [exec functions](https://linuxhint.com/exec_linux_system_call_c/), in this case we are only allowed to use execve. 
