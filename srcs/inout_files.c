@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 03:43:43 by mialbert          #+#    #+#             */
-/*   Updated: 2022/07/17 01:56:02 by mialbert         ###   ########.fr       */
+/*   Updated: 2022/07/17 16:32:26 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ static void	here_doc(t_data *data)
 	}
 	free(line);
 	dup2(data->infile, STDIN_FILENO);
-	unlink("./here_doc");
 	data->outfile = open(data->argv[data->argc - 1], O_RDWR | O_CREAT \
 														| O_APPEND, 0666);
 	if (data->outfile == -1)
 		display_error(data, "Bonus inout_files, Open outfile failed", false);
+	unlink("./here_doc");
 }
 
 int32_t	inout_files(t_data *data)

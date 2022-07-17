@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 18:48:19 by mialbert          #+#    #+#             */
-/*   Updated: 2022/07/17 01:57:21 by mialbert         ###   ########.fr       */
+/*   Updated: 2022/07/17 16:31:18 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int32_t	main(int32_t argc, char **argv, char **envp)
 	t_data	data;
 
 	ft_bzero(&data, sizeof(t_data));
-	if (!input_handler(argc))
+	if (!argc_check(argc))
 		return (EXIT_FAILURE);
 	init_data(&data, argc, argv, envp);
 	exec_cmds(&data, envp);
