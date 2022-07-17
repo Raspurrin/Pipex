@@ -35,7 +35,7 @@ You can utilise the [access()](https://linux.die.net/man/2/access) function for 
 To execute these programs in your own program, you need to use one of the [exec functions](https://linuxhint.com/exec_linux_system_call_c/), in this case we are only allowed to use execve. 
 If you execute a program like this, it will take over your process and any code written afterwards will be irrelevant, this is why we need
 to create child processes which can execute these programs in isolation. The fork function can create a child process. A child process will contain 
-a copy of all your code written up to that point and will inherit some other things, like file descriptors. 
+a copy of your code and attributes like file descriptors. 
 Everything written after that point will be executed by both processes if not further specified which should execute what part of your code. 
 And the order of execution is unreliable and will also change in behaviour on different systems. 
 This is all controllable however! You can use the return of [fork()](https://linux.die.net/man/2/fork), which will be 0 if you are in the child process. 
