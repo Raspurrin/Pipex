@@ -25,21 +25,24 @@ A here_doc is a multi string comment which is taken from STDIN. It will take inp
 ## Commands are programs!
 Commands like `ls` are actually programs! They can be found in the folders contained in the [environment variable](https://wiki.archlinux.org/title/environment_variables): PATH. 
 If you type `env` you can see all environment variables. And if you type `env | grep PATH` or `echo $PATH`, you will see everything contained in PATH.
-When you execute a command, these folders are searched for the command specified and then executed. Essentially providing you with a shortcut, 
+When you execute a command, these folders are searched for the right path for the given command and then executed. Essentially providing you with a shortcut, 
 so you don't have to type `bin/ls` or remember in which directory to find all these programs. 
+This behaviour is part of what we have to write in this project. We are not allowed to use execvpe() which would have done that for us.
+You can utilise the [access()](https://linux.die.net/man/2/access) function for this, which checks for valid paths and the [main argument envp](http://crasseux.com/books/ctutorial/Environment-variables.html), which is an array of strings containing the environment variables.
+
 
 ## Why processes? 
 To execute these programs in your own program, you need to use one of the [exec functions](https://linuxhint.com/exec_linux_system_call_c/), in this case we are only allowed to use execve. 
 If you execute a program like this, it will take over your process and any code written afterwards will be irrelevant, this is why we need
 to create child processes which can execute these programs in isolation. The fork function can create a child process. A child process will contain 
-a copy of all your code written up to that point and will inherit some other things, like file descriptors. 
+a copy of your code and attributes like file descriptors. 
 Everything written after that point will be executed by both processes if not further specified which should execute what part of your code. 
 And the order of execution is unreliable and will also change in behaviour on different systems. 
 This is all controllable however! You can use the return of [fork()](https://linux.die.net/man/2/fork), which will be 0 if you are in the child process. 
 And you can use [waitpid()](https://linux.die.net/man/2/waitpid) to wait for a child to finish executing before continuing.
 
 ## How to communicate between different processes:
-Processes occupy different spaces of memory, so they exist in isolation from one another. So this is where the actual [pipe()](https://www.geeksforgeeks.org/pipe-system-call/) comes in! It is one type of [inter-process communication](https://en.wikipedia.org/wiki/Inter-process_communication) which facilitates communication between processes. It takes in an array of two integers, which it will use to create the two filedescriptors that are used for the ends of the pipe. The first element (fd[0] if given fd[2]) will be the read end and fd[1] will be the write end of the pipe. If something is written in the write end, it can be accessed from the other. Create the pipe before creating the child process you want to communicate with, so it gets inherited by the child.
+Processes occupy different spaces of memory, so they exist in isolation from one another. So this is where the actual [pipe()](https://www.geeksforgeeks.org/pipe-system-call/) comes in! It is one type of [inter-process communication](https://en.wikipedia.org/wiki/Inter-process_communication) which facilitates communication between processes. It takes in an array of two integers, which it will use to open two filedescriptors that are used for the read and write end of the pipe. The first element, fd[0] will be the read end and fd[1] will be the write end of the pipe. If something is written in the write end, it can be accessed from the other. Create the pipe before creating the child process you want to communicate with, so it gets inherited by the child.
 I highly recommend [this](https://www.youtube.com/watch?v=cex9XrZCU14&list=PLfqABt5AS4FkW5mOn2Tn9ZZLLDwA3kZUY) playlist from Codevault about processes.
 
 ## Redirecting pipes to the input/output of programs:
