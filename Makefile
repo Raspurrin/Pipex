@@ -6,7 +6,7 @@
 #    By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/08 18:53:57 by mialbert          #+#    #+#              #
-#    Updated: 2022/07/15 22:19:59 by mialbert         ###   ########.fr        #
+#    Updated: 2022/07/17 01:59:28 by mialbert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,8 @@ NAME	= pipex
 CFLAGS	= -Wall -Werror -Wextra
 HEADER	= -I includes -I libs/libft/srcs
 LIBFT	= ./libs/libft/
-LIBFT_A = libs/libft/libft.a # ???????????? Why 
-#DEBUG	= -fsanitize=address
+LIBFT_A = libs/libft/libft.a # ??
+DEBUG	= -fsanitize=address
 SRCS	=	./srcs/init.c \
 			./srcs/errors.c \
 			./srcs/execution.c \
@@ -43,7 +43,7 @@ else
 SUBM_FLAG	= 
 endif
 
-all: $(SUBM_STATE) $(LIBFT_A) $(NAME) 
+all: $(SUBM_FLAG) $(LIBFT_A) $(NAME) 
 
 %.o : %.c 
 	@echo "$(B_BLUE)Compiling: $(BLUE)$(notdir $<) 🔨$(NC)"

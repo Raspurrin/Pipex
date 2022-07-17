@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 18:48:19 by mialbert          #+#    #+#             */
-/*   Updated: 2022/07/15 02:01:51 by mialbert         ###   ########.fr       */
+/*   Updated: 2022/07/17 01:57:21 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void	child_cmd(t_data *data, size_t i, char **envp, int32_t fd[2])
 		free(path);
 		display_error(data, "execve failed", true);
 	}
-	execve(path, data->full_cmd, envp);
 }
 
 /**
