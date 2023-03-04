@@ -6,7 +6,7 @@
 #    By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/08 18:53:57 by mialbert          #+#    #+#              #
-#    Updated: 2022/07/17 01:59:28 by mialbert         ###   ########.fr        #
+#    Updated: 2023/03/04 23:45:33 by mialbert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ DEBUG	= -fsanitize=address
 SRCS	=	./srcs/init.c \
 			./srcs/errors.c \
 			./srcs/execution.c \
-			./srcs/inout_files.c
+			./srcs/inout_files.c \
+			./srcs/main.c
 
 OBJS	= $(SRCS:.c=.o)
 

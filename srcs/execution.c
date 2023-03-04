@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 18:48:19 by mialbert          #+#    #+#             */
-/*   Updated: 2022/07/17 16:31:18 by mialbert         ###   ########.fr       */
+/*   Updated: 2023/03/04 23:48:01 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	child_cmd(t_data *data, size_t i, char **envp, int32_t fd[2])
  * from the commands to STDIN and STDOUT with dup2, which will then be used
  * by the next command. Closing the fds so the program doesn't wait for input.
  */
-static void	exec_cmds(t_data *data, char **envp)
+void	exec_cmds(t_data *data, char **envp)
 {
 	size_t	i;
 	int32_t	pid;
@@ -92,17 +92,4 @@ static void	exec_cmds(t_data *data, char **envp)
 	}
 	close(data->outfile);
 	close(data->infile);
-}
-
-int32_t	main(int32_t argc, char **argv, char **envp)
-{
-	t_data	data;
-
-	ft_bzero(&data, sizeof(t_data));
-	if (!argc_check(argc))
-		return (EXIT_FAILURE);
-	init_data(&data, argc, argv, envp);
-	exec_cmds(&data, envp);
-	free_at_exit(&data);
-	return (0);
 }

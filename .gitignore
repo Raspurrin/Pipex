@@ -59,3 +59,4 @@ dkms.conf
 .vscode/*.log
 .vscode/dryrun.log
 pipex
+.DS_Store

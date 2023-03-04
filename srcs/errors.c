@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 17:48:54 by mialbert          #+#    #+#             */
-/*   Updated: 2022/07/17 16:35:33 by mialbert         ###   ########.fr       */
+/*   Updated: 2023/03/04 23:46:01 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ void	display_error(t_data *data, char *error_msg, bool yeet)
  * Mandatory part should only use one infile, outfile and 2 commands.
  */
 #ifdef BONUS // for multiple arguments
-bool	argc_check(int32_t argc)
+bool	argc_check(int32_t argc, char **argv)
 {
-	if (ft_strncmp(data->argv[1], "here_doc", 9) == 0 && argc < 6)
+	if (argv[1] && ft_strncmp(argv[1], "here_doc", 9) == 0 && argc < 6)
 		return (ft_putendl_fd("To use the here_doc you need a delimiter,"
 				" two commands and an output file", STDERR_FILENO), false);
 	if (argc < 5)
@@ -58,8 +58,10 @@ bool	argc_check(int32_t argc)
 }
 
 #else // for one infile, outfile and 2 commands + program name.
-bool	argc_check(int32_t argc)
+bool	argc_check(int32_t argc, char **argv)
 {
+	(void)argv;
+
 	if (argc != 5)
 		return (ft_putendl_fd("Needs to be exactly 4 arguments", \
 													STDERR_FILENO), false);

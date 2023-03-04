@@ -35,9 +35,10 @@ typedef struct s_data
 }	t_data;
 
 t_data	*data(t_data *data);
+void	exec_cmds(t_data *data, char **envp);
 void	init_data(t_data *data, int32_t argc, char **argv, char **envp);
 void	display_error(t_data *data, char *error_msg, bool yeet);
-bool	argc_check(int32_t argc);
+bool	argc_check(int32_t argc, char **argv);
 void	free_at_exit(t_data *data);
 int32_t	inout_files(t_data *data);
 #endif
