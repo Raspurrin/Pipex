@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 17:48:54 by mialbert          #+#    #+#             */
-/*   Updated: 2023/03/04 23:46:01 by mialbert         ###   ########.fr       */
+/*   Updated: 2023/03/05 00:11:48 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ bool	argc_check(int32_t argc, char **argv)
 bool	argc_check(int32_t argc, char **argv)
 {
 	(void)argv;
-
 	if (argc != 5)
 		return (ft_putendl_fd("Needs to be exactly 4 arguments", \
 													STDERR_FILENO), false);
